@@ -14,16 +14,26 @@ typedef struct Node {
 } Node;
 Node *first;
 
-void init() {
+void Init() {
     first = (Node *) malloc(sizeof(Node));
     first->next = NULL;
 }
 
-void insert(DataType x) {
-    Node *p = (Node *) malloc(sizeof(Node));
-    p->data = x;
-    p->next = first->next;
-    first->next = p;
+void Insert(Node *first, int i, DataType x) {
+    Node *p = first;
+    int j = 0;
+    while (p != NULL && j < i - 1) {
+        p = p->next;
+        j++;
+    }
+    if (p == NULL || j > i - 1) {
+        printf("插入位置不合法\n");
+        return;
+    }
+    Node *s = (Node *) malloc(sizeof(Node));
+    s->data = x;
+    s->next = p->next;
+    p->next = s;
 }
 
 void PrintList(Node *first){
@@ -58,4 +68,31 @@ void Delete(DataType x) {
             p = p->next;
         }
     }
+}
+
+int Get(Node *first, int i, DataType *ptr) {
+    Node *p = first->next;
+    int j = 1;
+    while (p != NULL && j < i) {
+        p = p->next;
+        j++;
+    }
+    if (p == NULL || j > i) {
+        return 0;
+    }
+    *ptr = p->data;
+    return 1;
+}
+
+int Locate(Node *first, DataType x) {
+    Node *p = first->next;
+    int j = 1;
+    while (p != NULL && p->data != x){
+        p = p->next;
+        j++;
+    }
+    if (p == NULL){
+        return 0;
+    }
+    return j;
 }
