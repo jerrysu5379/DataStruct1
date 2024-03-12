@@ -76,6 +76,6 @@ Node *RearCreate(DataType a[], int n) {
 }
 
 int main(){
-
+    return 0;
 }
 
