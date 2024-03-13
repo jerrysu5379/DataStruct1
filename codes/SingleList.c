@@ -75,6 +75,15 @@ Node *RearCreate(DataType a[], int n) {
     return L;
 }
 
+void DestroyList(Node *L) {
+    Node *p = L;
+    while (p) {
+        L = p->next;
+        free(p);
+        p = L;
+    }
+}
+
 int main(){
     return 0;
 }
